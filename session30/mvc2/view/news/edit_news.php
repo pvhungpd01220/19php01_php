@@ -7,7 +7,7 @@
 		<textarea name="description" rows="8" value="<?php echo $editNews['description'];?>"></textarea>
 	</p>
 	<p>created
-		<input type="date" name="created" value="<?php echo ['created'];?>">
+		<input type="date" name="created">
 	</p>
 	<p><input type="submit" name="edit_news_form" value="edit news"></p>
 </form>

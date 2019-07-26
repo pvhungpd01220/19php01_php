@@ -1,5 +1,5 @@
 <h1>Add news page</h1>
-<form action="index.php?action=edit_news" method="post">
+<form action="index.php?action=edit_news&id=<?php echo $id?>"  method="post">
 	<p>title
 		<input type="text" name="title" value="<?php echo $editNews['title'];?>">
 	</p>
