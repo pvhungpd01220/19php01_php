@@ -14,7 +14,13 @@
 			return $listUser;
 		}
 
-		public function getUser($id, $username, $password, $avatar){
+		public function getUser($id) {
+			$sql = "SELECT * FROM users WHERE id = $id";
+			$result = mysqli_query($this->connect(), $sql);
+			return $result->fetch_assoc();
+		}
+
+		public function editUser($id, $username, $password, $avatar){
 			$sql = "UPDATE users SET username = '$username', password = '$password',avatar = '$avatar' WHERE id = $id";
 			return mysqli_query($this->connect(),$sql);
 		}
