@@ -35,5 +35,11 @@
 			$listUser = mysqli_query($this->connect(), $sql);
 			return $listUser;
 		}
+
+		public function getProductPage() {
+			$sql = "SELECT * FROM products";
+			$productList = mysqli_query($this->connect(), $sql);
+			return $productList;
+		}
 	}
 ?>

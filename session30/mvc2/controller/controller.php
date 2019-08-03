@@ -19,7 +19,7 @@
 					// goi model xu ly du lieu
 					$showNews = $model->getNews();
 					$related = $model->getNewsRelated();
-					$newsList = $model->getNewsPage();
+
 					// goi view news
 					include 'view/news/news.php';
 					break;
@@ -49,59 +49,43 @@
 						//header("Location: "index.php?action=products);
 						$functionCommon->redirectPage('index.php?action=products');
 					}
-					// goi view contact
-					include 'view/contact/contact.php';
 					break;
+				case 'add_product':
+					# code...
+					// check xem da submit add product chua?
+					if (isset($_POST['add_product_form'])) {
+						$name = $_POST['name'];
+						$description = $_POST['description'];
+						$price = $_POST['price'];
+						$image = 'default.jpg';
+						$created = date('Y-m-d h:i:s');
+						// save vao database
+						if ($model->addProduct($name, $description, $price, $image, $created) === TRUE) {
+							$functionCommon->redirectPage('index.php?action=products');
+						}
+					}
+					// goi view hien thi trang add product
+					include 'view/products/add_product.php';
 					break;
+				case 'edit_product':
+						# code...
+						$id = $_GET['id'];
+						$editProduct =$model->getProduct($id);
+						// edit
+						if (isset($_POST['edit_product_form'])) {
+							$name = $_POST['name'];
+						  $description = $_POST['description'];
+						  $price = $_POST['price'];
+						 // edit vao database
+						if ($model->editProduct($id,$name, $description, $price) === TRUE) {
+							$functionCommon->redirectPage('index.php?action=products');
+						}
+						}
+						include 'view/products/edit_product.php';
+						break;	
 				default:
 					# code...
 					break;
-				case 'add_news':
-					# code...
-					// check xem da submit add news chua?
-					if (isset($_POST['add_news_form'])) {
-						$title = $_POST['title'];
-						$description = $_POST['description'];
-						$created = date('Y-m-d h:i:s');
-						$image = 'default.jpg';
-						if ($_FILES['image']['error'] == 0) {
-            			$avatar = uniqid().'_'.$_FILES['image']['name'];
-            			move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/'.$image);
-          				}
-						// save vao database
-						if ($model->addNews($title, $description, $created, $image) === TRUE) {
-							$functionCommon->redirectPage('index.php?action=news');
-						}
-					}
-					// goi view hien thi trang add news
-					include 'view/news/add_news.php';
-					break;
-				case 'delete_news':
-				   // lay id cua san pham can xoa
-					$id = $_GET['id'];
-					// goi model thuc hien xoa san pham
-					if ($model->deleteNews($id) === TRUE) {
-						//header("Location: "index.php?action=news);
-						$functionCommon->redirectPage('index.php?action=news');
-					}
-					// goi view contact
-					include 'view/contact/contact.php';
-					break;
-				case 'edit_news';
-					$id = $_GET['id'];
-						$editNews =$model->getNewsPage($id);
-						// edit
-						if (isset($_POST['edit_news_form'])) {
-							$name = $_POST['title'];
-						  $description = $_POST['description'];
-						  $created = date('Y-m-d h:i:s');
-						 // edit vao database
-						if ($model->editNews($title, $description) === TRUE) {
-							$functionCommon->redirectPage('index.php?action=news');
-						}
-						}
-				include 'view/news/edit_news.php';
-				break;
 			}
 		}
 

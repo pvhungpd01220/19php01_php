@@ -88,6 +88,12 @@
 					unset($_SESSION['login']);
 					header("Location: admin.php?controller=user&action=login");
 					break;
+				case 'list_product':
+					// goi model xu ly du lieu
+					$productList = $model->getProductPage();
+					// goi view products
+					include 'view/user/product/list_product.php';
+					break;
 				default:
 					# code...
 					break;

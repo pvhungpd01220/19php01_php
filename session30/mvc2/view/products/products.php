@@ -1,4 +1,5 @@
 <h1>Products page here</h1>
+<a href="index.php?action=add_product">Add product</a>
 <table class="table table-bordered">
   <tr>
     <th style="width: 10px">#</th>
@@ -21,7 +22,7 @@
       </td>
       <td><img src="uploads/<?php echo $row['image']?>" alt="image" class="avatar_user"></td>
        <td><?php echo $row['created']?></td>
-      <td><a href="index.php?action=add_product&id=<?php echo $id?>">Edit</a> | <a href="index.php?action=delete_product&id=<?php echo $id?>">Delete</a></td>
+      <td><a href="index.php?action=edit_product&id=<?php echo $id?>">Edit</a> | <a href="index.php?action=delete_product&id=<?php echo $id?>">Delete</a></td>
     </tr>
   <?php 
   	}

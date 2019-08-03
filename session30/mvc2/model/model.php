@@ -34,26 +34,20 @@
 			return mysqli_query($this->connect(), $sql);
 		}
 
-		public function getNewsPage() {
-			$sql = "SELECT * FROM news";
-			$newsList = mysqli_query($this->connect(), $sql);
-			return $newsList;
+		public function addProduct($name, $description, $price, $image, $created) {
+			$sql = "INSERT INTO products(name, description, price, image, created) VALUES ('$name', '$description', $price, '$image', '$created')";
+			return mysqli_query($this->connect(), $sql);
+		}
+		public function getProduct($id) {
+			$sql = "SELECT * FROM products WHERE id = $id";
+			$result = mysqli_query($this->connect(), $sql);
+			return $result->fetch_assoc();
 		}
 
-		public function addNews($title, $description, $created, $image) {
-			$sql = "INSERT INTO news(title, description, created, image) VALUES ('$title', '$description', '$created', '$image' )";
+		public function editProduct($id, $name, $description, $price) {
+			$sql = "UPDATE products SET name = '$name', description = '$description', price = $price WHERE id = $id";
 			return mysqli_query($this->connect(), $sql);
 		}
 
-		public function deleteNews($id) {
-			$sql = "DELETE FROM news WHERE id = $id";
-			return mysqli_query($this->connect(), $sql);
-		}
-
-		
-		public function editNews($title, $description) {
-			$sql = "UPDATE news SET title = '$title', description = '$description' WHERE id = $id";
-			return mysqli_query($this->connect(), $sql);
-		}
 	}
 ?>
